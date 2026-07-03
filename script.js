@@ -13,10 +13,8 @@ const fileInput = document.getElementById('file-input');
 const chooseBtn = document.getElementById('choose-btn');
 const pagesContainer = document.getElementById('pages-container');
 const actionBar = document.getElementById('action-bar');
-const bottomActionBar = document.getElementById('bottom-action-bar');
 const modal = document.getElementById('processing-modal');
 const downloadBtn = document.getElementById('download-btn');
-const downloadBtnBottom = document.getElementById('download-btn-bottom');
 
 // --- Helper: Download Function ---
 function download(data, filename, type) {
@@ -88,9 +86,6 @@ async function processFile(file) {
         await buildPageEditors();
 
         actionBar.style.display = 'block';
-        if(totalPages > 1) {
-            bottomActionBar.style.display = 'block';
-        }
 
     } catch (error) {
         console.error("Error reading PDF:", error);
@@ -160,8 +155,8 @@ async function buildPageEditors() {
             const context = canvas.getContext('2d');
             
             const unscaledViewport = page.getViewport({ scale: 1 });
-            // Scale to fit the 450px max height constraint
-            const scale = 450 / unscaledViewport.height; 
+            // Increased scale logic to match the new 700px CSS constraint
+            const scale = 700 / unscaledViewport.height; 
             const viewport = page.getViewport({ scale: scale });
             
             canvas.height = viewport.height;
@@ -216,7 +211,7 @@ window.updateCropUI = function(pageIndex) {
 }
 
 // --- Process and Download Final Cropped PDF ---
-async function downloadCroppedPdf() {
+downloadBtn.addEventListener('click', async () => {
     if (!uploadedFile) return;
     modal.style.display = 'flex';
 
@@ -258,7 +253,4 @@ async function downloadCroppedPdf() {
     }
     
     modal.style.display = 'none';
-}
-
-downloadBtn.addEventListener('click', downloadCroppedPdf);
-downloadBtnBottom.addEventListener('click', downloadCroppedPdf);
+});
