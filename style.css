@@ -17,7 +17,7 @@ body {
 
 .app-wrapper {
     width: 100%;
-    max-width: 1100px; 
+    max-width: 1200px; /* Widened slightly to accommodate the larger preview */
 }
 
 .container {
@@ -135,8 +135,8 @@ header p {
 }
 
 .preview-section {
-    flex: 1;
-    min-width: 300px;
+    flex: 2; /* Takes up more space for the larger preview */
+    min-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,7 +153,7 @@ header p {
 }
 
 .canvas-wrapper {
-    position: relative; /* Crucial for overlay */
+    position: relative; 
     display: inline-block;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
@@ -161,7 +161,8 @@ header p {
 .pdf-canvas {
     display: block;
     max-width: 100%;
-    max-height: 450px;
+    /* Increased height for a much larger preview */
+    max-height: 700px;
     background: white;
 }
 
@@ -171,7 +172,7 @@ header p {
     top: 0; left: 0; right: 0; bottom: 0;
     border: 3px dashed #e74c3c;
     background-color: rgba(231, 76, 60, 0.1);
-    pointer-events: none; /* Lets you click through it if needed */
+    pointer-events: none; 
     transition: all 0.1s;
 }
 
